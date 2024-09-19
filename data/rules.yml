@@ -2,12 +2,36 @@ version: "3.1"
 
 rules:
 
-- rule: Say goodbye anytime the user says goodbye
+- rule: Greet back
   steps:
-  - intent: goodbye
-  - action: utter_goodbye
+   - intent: greet
+   - action: utter_greet
 
-- rule: Say 'I am a bot' anytime the user challenges
+- rule: Answer pizza order
   steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+   - intent: order_pizza
+   - action: utter_order_pizza
+  
+- rule: Confirm pizza order and ask address
+  condition:
+   - active_loop: null 
+  steps:
+   - intent: specify_pizza
+   - action: utter_specify_pizza
+  
+- rule: Confirm address and ask confirmation
+  condition:
+   - active_loop: null 
+  steps:
+  - intent: specify_address
+  - action: utter_specify_address
+  
+- rule: Confirm delivery
+  steps:
+  - intent: confirm_delivery
+  - action: utter_confirm_delivery
+    
+- rule: Cancel delivery
+  steps:
+  - intent: cancel_order
+  - action: utter_cancel_order
