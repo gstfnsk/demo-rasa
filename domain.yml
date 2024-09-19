@@ -2,32 +2,55 @@ version: "3.1"
 
 intents:
   - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
+  - order_pizza
+  - specify_pizza
+  - specify_address
+  - confirm_delivery
+  - cancel_order
+
+entities:
+  - flavor
+  - address
+
+slots:
+  address:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: address
+
+  flavor:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: flavor
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+    - text: "Hey! Would you like to order pizza?"
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+  utter_order_pizza:
+    - text: "What pizza flavor would you like?"
 
-  utter_did_that_help:
-  - text: "Did that help you?"
+  utter_specify_pizza:
+    - text: "A {flavor} pizza it is. What's the delivery address?"
 
-  utter_happy:
-  - text: "Great, carry on!"
+  utter_specify_address:
+    - text: "Your pizza will be delivered in {address}."
 
-  utter_goodbye:
-  - text: "Bye"
+  utter_confirm_delivery:
+    - text: "Your pizza will be delivered soon."
 
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  utter_cancel_order:
+    - text: "Delivery canceled."
+
+actions:
+  - utter_greet
+  - utter_order_pizza
+  - utter_specify_pizza
+  - utter_specify_address
+  - utter_confirm_delivery
+  - utter_cancel_order
 
 session_config:
   session_expiration_time: 60
